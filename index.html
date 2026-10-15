@@ -34,6 +34,17 @@
         } else {
             document.documentElement.classList.remove('dark');
         }
+
+        // Automatic image path resolver: if images are deployed at the root on Vercel/GitHub, auto-recover instantly
+        window.addEventListener('error', function(e) {
+            if (e.target && e.target.tagName === 'IMG') {
+                var img = e.target;
+                if (!img.dataset.triedRoot && img.src && img.src.indexOf('images/') !== -1) {
+                    img.dataset.triedRoot = '1';
+                    img.src = img.src.replace('images/', '');
+                }
+            }
+        }, true);
     </script>
     <style>
         /* Tagline styling: increased contrast making text darker/crisp for readability */
@@ -515,7 +526,7 @@
                     <div class="absolute -inset-2 bg-gradient-to-tr from-blue-600/30 via-cyan-500/20 to-indigo-600/30 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-900 cursor-pointer" onclick="openModal('images/cad-hero-render.jpg')" title="Click to enlarge 3D CAD Model">
                         <img src="images/cad-hero-render.jpg" 
-                             onerror="this.src='https://placehold.co/800x800/1e293b/ffffff?text=3D+CAD+Model'" 
+                             onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/800x800/1e293b/ffffff?text=3D+CAD+Model'" 
                              alt="High-Precision 3D CAD Gearbox Assembly Model" 
                              class="w-full h-full object-cover aspect-square transform group-hover:scale-105 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
@@ -570,7 +581,7 @@
                     <div class="absolute -inset-2 bg-gradient-to-tr from-blue-600/20 via-cyan-500/20 to-indigo-600/20 rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-900 cursor-pointer aspect-[4/3] sm:aspect-[4/3] lg:aspect-[5/4] w-full" onclick="openModal('images/daman-workshop.jpg')" title="Click to enlarge Daman's Workshop">
                         <img src="images/daman-workshop.jpg" 
-                             onerror="this.src='https://placehold.co/600x700/e2e8f0/475569?text=Daman\'s+Workspace'" 
+                             onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x700/e2e8f0/475569?text=Daman\'s+Workspace'" 
                              alt="Daman's CAD Design Workstation & Engineering Studio" 
                              class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
@@ -854,7 +865,7 @@
                 <!-- Project 1: Engine Crankshaft Assembly (Featured) -->
                 <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('crankshaft')">
-                        <img src="images/crankshaft.png" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Crankshaft'" alt="Engine Crankshaft and Pistons" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/crankshaft.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/e2e8f0/475569?text=Crankshaft'" alt="Engine Crankshaft and Pistons" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('crankshaft')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -903,7 +914,7 @@
 <!-- Project 2: Precision Planetary Gearbox (Featured) -->
                 <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('gearbox')">
-                        <img src="images/planetary-gearbox.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Planetary+Gearbox'" alt="Precision Planetary Gearbox Assembly" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/planetary-gearbox.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Planetary+Gearbox'" alt="Precision Planetary Gearbox Assembly" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('gearbox')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1001,7 +1012,7 @@
 <!-- Project 4: Heavy Duty Caster Wheel -->
                 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('caster-wheel')">
-                        <img src="images/caster-wheel.png" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Caster+Wheel'" alt="Heavy Duty Swivel Caster Wheel" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/caster-wheel.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/e2e8f0/475569?text=Caster+Wheel'" alt="Heavy Duty Swivel Caster Wheel" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('caster-wheel')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1034,7 +1045,7 @@
 <!-- Project 5: Precision Ball Bearing -->
                 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('ball-bearing')">
-                        <img src="images/ball-bearing.png" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Ball+Bearing'" alt="Precision Deep Groove Ball Bearing" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/ball-bearing.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/e2e8f0/475569?text=Ball+Bearing'" alt="Precision Deep Groove Ball Bearing" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('ball-bearing')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1067,7 +1078,7 @@
 <!-- Project 6: Heavy Duty C-Clamp -->
                 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('c-clamp')">
-                        <img src="images/c-clamp.png" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=C-Clamp'" alt="Machined C-Clamp" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/c-clamp.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/e2e8f0/475569?text=C-Clamp'" alt="Machined C-Clamp" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('c-clamp')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1100,7 +1111,7 @@
 <!-- Project 7: Specialized Fork Component -->
                 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('fork-bracket')">
-                        <img src="images/fork-bracket.png" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Fork+Bracket'" alt="Structural Fork Bracket Component" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/fork-bracket.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/e2e8f0/475569?text=Fork+Bracket'" alt="Structural Fork Bracket Component" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('fork-bracket')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1133,7 +1144,7 @@
 <!-- Project 8: Robotic Gripper Mechanism -->
                 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('robotic-gripper')">
-                        <img src="images/robotic-gripper.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Robotic+Gripper'" alt="Robotic End-Effector Gripper" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/robotic-gripper.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Robotic+Gripper'" alt="Robotic End-Effector Gripper" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('robotic-gripper')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1166,7 +1177,7 @@
 <!-- Project 9: Valve Body 2D Blueprint & CAD (NEW) -->
                 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('hydraulic-valve')">
-                        <img src="images/valve-body-drawing.jpg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Valve+Body+Blueprint'" alt="Industrial Valve Body Engineering Blueprint" class="w-full h-full object-contain p-3 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/valve-body-drawing.jpg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Valve+Body+Blueprint'" alt="Industrial Valve Body Engineering Blueprint" class="w-full h-full object-contain p-3 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('hydraulic-valve')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1199,7 +1210,7 @@
 <!-- Project 10: Custom Machined CNC Component -->
                 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('machined-part')">
-                        <img src="images/proteus-machined-system.jpg" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Machined+Part'" alt="Custom Machined Component" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/proteus-machined-system.jpg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/e2e8f0/475569?text=Machined+Part'" alt="Custom Machined Component" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('machined-part')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1232,7 +1243,7 @@
 <!-- Project 11: Mechanical Sub-Assembly -->
                 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('sub-assembly')">
-                        <img src="images/coupling-sub-assembly.png" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Sub-Assembly'" alt="Mechanical Sub-Assembly" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/coupling-sub-assembly.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/e2e8f0/475569?text=Sub-Assembly'" alt="Mechanical Sub-Assembly" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('sub-assembly')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1265,7 +1276,7 @@
 <!-- Project 12: Cylindrical Enclosure / Cup -->
                 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
                     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('flanged-container')">
-                        <img src="images/flanged-container.png" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Flanged+Container'" alt="Flanged Cylindrical Container" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+                        <img src="images/flanged-container.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/e2e8f0/475569?text=Flanged+Container'" alt="Flanged Cylindrical Container" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
                             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('flanged-container')">
                                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1298,7 +1309,7 @@
 <!-- Project 13: Turbocharger Milled Impeller -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('turbo-impeller')">
-        <img src="images/turbo-impeller.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Turbocharger%20Milled%20Impeller'" alt="Turbocharger Milled Impeller" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/turbo-impeller.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Turbocharger%20Milled%20Impeller'" alt="Turbocharger Milled Impeller" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('turbo-impeller')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1331,7 +1342,7 @@
 <!-- Project 14: Brake Caliper & Floating Rotor -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('brake-caliper')">
-        <img src="images/brake-caliper.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Brake%20Caliper%20%26%20Floating%20Rotor'" alt="Brake Caliper & Floating Rotor" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/brake-caliper.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Brake%20Caliper%20%26%20Floating%20Rotor'" alt="Brake Caliper & Floating Rotor" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('brake-caliper')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1364,7 +1375,7 @@
 <!-- Project 15: MacPherson Suspension Strut -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('suspension-strut')">
-        <img src="images/suspension-strut.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=MacPherson%20Suspension%20Strut'" alt="MacPherson Suspension Strut" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/suspension-strut.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=MacPherson%20Suspension%20Strut'" alt="MacPherson Suspension Strut" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('suspension-strut')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1397,7 +1408,7 @@
 <!-- Project 16: Jet Engine Turbine Blade -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('turbine-blade')">
-        <img src="images/turbine-blade.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Jet%20Engine%20Turbine%20Blade'" alt="Jet Engine Turbine Blade" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/turbine-blade.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Jet%20Engine%20Turbine%20Blade'" alt="Jet Engine Turbine Blade" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('turbine-blade')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1430,7 +1441,7 @@
 <!-- Project 17: Robotic Harmonic Drive Joint -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('harmonic-drive')">
-        <img src="images/harmonic-drive.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Robotic%20Harmonic%20Drive%20Joint'" alt="Robotic Harmonic Drive Joint" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/harmonic-drive.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Robotic%20Harmonic%20Drive%20Joint'" alt="Robotic Harmonic Drive Joint" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('harmonic-drive')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1463,7 +1474,7 @@
 <!-- Project 18: Precision Ground Ball Screw -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('ball-screw')">
-        <img src="images/ball-screw.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Precision%20Ground%20Ball%20Screw'" alt="Precision Ground Ball Screw" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/ball-screw.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Precision%20Ground%20Ball%20Screw'" alt="Precision Ground Ball Screw" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('ball-screw')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1496,7 +1507,7 @@
 <!-- Project 19: Heavy Duty Hydraulic Cylinder -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('hydraulic-cylinder')">
-        <img src="images/hydraulic-cylinder.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Heavy%20Duty%20Hydraulic%20Cylinder'" alt="Heavy Duty Hydraulic Cylinder" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/hydraulic-cylinder.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Heavy%20Duty%20Hydraulic%20Cylinder'" alt="Heavy Duty Hydraulic Cylinder" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('hydraulic-cylinder')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1529,7 +1540,7 @@
 <!-- Project 20: Centrifugal Slurry Impeller -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('slurry-pump')">
-        <img src="images/slurry-pump.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Centrifugal%20Slurry%20Impeller'" alt="Centrifugal Slurry Impeller" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/slurry-pump.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Centrifugal%20Slurry%20Impeller'" alt="Centrifugal Slurry Impeller" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('slurry-pump')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1562,7 +1573,7 @@
 <!-- Project 21: Omnidirectional Mecanum Wheel -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('mecanum-wheel')">
-        <img src="images/mecanum-wheel.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Omnidirectional%20Mecanum%20Wheel'" alt="Omnidirectional Mecanum Wheel" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/mecanum-wheel.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Omnidirectional%20Mecanum%20Wheel'" alt="Omnidirectional Mecanum Wheel" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('mecanum-wheel')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1595,7 +1606,7 @@
 <!-- Project 22: Progressive Stamping Die Set -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('progressive-die')">
-        <img src="images/progressive-die.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Progressive%20Stamping%20Die%20Set'" alt="Progressive Stamping Die Set" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/progressive-die.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Progressive%20Stamping%20Die%20Set'" alt="Progressive Stamping Die Set" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('progressive-die')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1628,7 +1639,7 @@
 <!-- Project 23: High-Pressure Trunnion Ball Valve -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('ball-valve')">
-        <img src="images/ball-valve.png" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=High-Pressure%20Trunnion%20Ball%20Valve'" alt="High-Pressure Trunnion Ball Valve" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/ball-valve.png" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=High-Pressure%20Trunnion%20Ball%20Valve'" alt="High-Pressure Trunnion Ball Valve" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('ball-valve')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1661,7 +1672,7 @@
 <!-- Project 24: Self-Centering Soft-Jaw Vise -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('soft-jaw-vise')">
-        <img src="images/soft-jaw-vise.svg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Self-Centering%20Soft-Jaw%20Vise'" alt="Self-Centering Soft-Jaw Vise" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/soft-jaw-vise.svg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Self-Centering%20Soft-Jaw%20Vise'" alt="Self-Centering Soft-Jaw Vise" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('soft-jaw-vise')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1694,7 +1705,7 @@
 <!-- Project 25: Multi-Cavity Injection Mold -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('injection-mold')">
-        <img src="images/injection-mold.svg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Multi-Cavity%20Injection%20Mold'" alt="Multi-Cavity Injection Mold" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/injection-mold.svg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Multi-Cavity%20Injection%20Mold'" alt="Multi-Cavity Injection Mold" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('injection-mold')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1727,7 +1738,7 @@
 <!-- Project 26: Carbon Fiber Drone Airframe -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('carbon-drone-frame')">
-        <img src="images/carbon-drone-frame.svg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Carbon%20Fiber%20Drone%20Airframe'" alt="Carbon Fiber Drone Airframe" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/carbon-drone-frame.svg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Carbon%20Fiber%20Drone%20Airframe'" alt="Carbon Fiber Drone Airframe" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('carbon-drone-frame')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1760,7 +1771,7 @@
 <!-- Project 27: Pillow Block Split Bearing -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('pillow-block')">
-        <img src="images/pillow-block.svg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Pillow%20Block%20Split%20Bearing'" alt="Pillow Block Split Bearing" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/pillow-block.svg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Pillow%20Block%20Split%20Bearing'" alt="Pillow Block Split Bearing" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('pillow-block')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1793,7 +1804,7 @@
 <!-- Project 28: Cycloidal Speed Reducer -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('cycloidal-drive')">
-        <img src="images/cycloidal-drive.svg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Cycloidal%20Speed%20Reducer'" alt="Cycloidal Speed Reducer" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/cycloidal-drive.svg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Cycloidal%20Speed%20Reducer'" alt="Cycloidal Speed Reducer" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('cycloidal-drive')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1826,7 +1837,7 @@
 <!-- Project 29: Robotic Tool Changer Coupler -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('tool-changer')">
-        <img src="images/tool-changer.svg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Robotic%20Tool%20Changer%20Coupler'" alt="Robotic Tool Changer Coupler" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/tool-changer.svg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Robotic%20Tool%20Changer%20Coupler'" alt="Robotic Tool Changer Coupler" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('tool-changer')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1859,7 +1870,7 @@
 <!-- Project 30: Heat Exchanger Tubesheet -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('heat-exchanger')">
-        <img src="images/heat-exchanger.svg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Heat%20Exchanger%20Tubesheet'" alt="Heat Exchanger Tubesheet" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/heat-exchanger.svg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Heat%20Exchanger%20Tubesheet'" alt="Heat Exchanger Tubesheet" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('heat-exchanger')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1892,7 +1903,7 @@
 <!-- Project 31: Orthopedic Surgical Drill -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('orthopedic-drill')">
-        <img src="images/orthopedic-drill.svg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Orthopedic%20Surgical%20Drill'" alt="Orthopedic Surgical Drill" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/orthopedic-drill.svg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Orthopedic%20Surgical%20Drill'" alt="Orthopedic Surgical Drill" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('orthopedic-drill')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -1925,7 +1936,7 @@
 <!-- Project 32: Satellite Solar Panel Hinge -->
 <div class="more-project-card hidden group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex flex-col">
     <div class="relative w-full h-64 overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer" onclick="openProjectModal('space-hinge')">
-        <img src="images/space-hinge.svg" onerror="this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Satellite%20Solar%20Panel%20Hinge'" alt="Satellite Solar Panel Hinge" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
+        <img src="images/space-hinge.svg" onerror="if(!this.dataset.triedRoot&&this.src.includes('images/')){this.dataset.triedRoot='1';this.src=this.src.replace('images/','');}else{this.src='https://placehold.co/600x400/1e293b/38bdf8?text=Satellite%20Solar%20Panel%20Hinge'" alt="Satellite Solar Panel Hinge" class="w-full h-full object-contain p-4 transform group-hover:scale-105 transition-transform duration-500 bg-white dark:bg-slate-900">
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 backdrop-blur-none group-hover:backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
             <button class="px-4 py-2 bg-blue-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 ease-pop shadow-xl text-xs font-semibold gap-1.5 focus:outline-none" aria-label="Explore Case Study" onclick="event.stopPropagation(); openProjectModal('space-hinge')">
                 <i class="fas fa-layer-group"></i> Multi-View Case Study
@@ -4343,6 +4354,13 @@
 
                 if (imgEl) {
                     imgEl.classList.remove('hidden');
+                    imgEl.dataset.triedRoot = '';
+                    imgEl.onerror = function() {
+                        if (!this.dataset.triedRoot && this.src && this.src.indexOf('images/') !== -1) {
+                            this.dataset.triedRoot = '1';
+                            this.src = this.src.replace('images/', '');
+                        }
+                    };
                     imgEl.style.opacity = '0';
                     setTimeout(() => {
                         imgEl.src = activeView.image || project.views[0]?.image || 'images/sheet-metal-enclosure.png';
