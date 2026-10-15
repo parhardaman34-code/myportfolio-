@@ -1,0 +1,108 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    
+    <!-- Shading Gradients -->
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="40%" stop-color="#e2e8f0"/>
+      <stop offset="70%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.02"/>
+    </linearGradient>
+
+    <!-- Isometric Grid Pattern -->
+    <pattern id="isoGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 40 M 0 0 L 40 40" fill="none" stroke="#334155" stroke-width="0.5" stroke-opacity="0.25"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+  <rect width="800" height="600" fill="url(#isoGrid)"/>
+
+  <!-- Ambient Glow -->
+  <circle cx="400" cy="300" r="260" fill="url(#glowGrad)"/>
+
+  <!-- Technical Frame & Title Block -->
+  <rect x="24" y="24" width="752" height="552" fill="none" stroke="#334155" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <rect x="28" y="28" width="744" height="544" fill="none" stroke="#475569" stroke-width="0.8"/>
+
+  <!-- Corner Alignment Marks -->
+  <path d="M 24 40 L 40 40 L 40 24 M 776 40 L 760 40 L 760 24 M 24 560 L 40 560 L 40 576 M 776 560 L 760 560 L 760 576" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+
+  <!-- Technical Telemetry Top Left -->
+  <g font-family="'Inter', -apple-system, sans-serif" font-size="11" fill="#94a3b8">
+    <text x="44" y="52" font-weight="700" fill="#38bdf8" letter-spacing="1">SOLIDWORKS 3D CAD MODEL</text>
+    <text x="44" y="68" fill="#64748b">SCALE: 1:1  |  PROJECTION: THIRD ANGLE  |  STATUS: RELEASED</text>
+  </g>
+
+  <!-- Title Block Bottom Right -->
+  <g transform="translate(480, 480)">
+    <rect width="280" height="80" rx="6" fill="#1e293b" fill-opacity="0.9" stroke="#334155" stroke-width="1"/>
+    <rect x="0" y="0" width="280" height="24" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="12" y="16" font-family="'Inter', sans-serif" font-size="10" font-weight="700" fill="#38bdf8" letter-spacing="0.5">PART SPECIFICATION / GD&amp;T</text>
+    <text x="12" y="42" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#f8fafc">Robotic Quick-Coupler</text>
+    <text x="12" y="58" font-family="'Inter', sans-serif" font-size="10" fill="#94a3b8">DWG NO: <tspan fill="#f1f5f9" font-weight="600">QC-ROBOT-80</tspan> | MATL: <tspan fill="#f1f5f9" font-weight="600">Anodized 7075-T6</tspan></text>
+    <text x="12" y="72" font-family="'Inter', sans-serif" font-size="9" fill="#64748b">DESIGNER: DAMANJIT SINGH  |  VERIFIED DFM</text>
+  </g>
+
+  <!-- Coordinate Triad Bottom Left -->
+  <g transform="translate(60, 520)">
+    <line x1="0" y1="0" x2="35" y2="0" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="0" y2="-35" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="-22" y2="22" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="3.5" fill="#f8fafc"/>
+    <text x="42" y="4" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#ef4444">X</text>
+    <text x="-4" y="-42" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#22c55e">Y</text>
+    <text x="-32" y="32" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#3b82f6">Z</text>
+  </g>
+
+  <!-- Main CAD Model Geometry Render -->
+    <g transform="translate(150, 110)">
+    <!-- Master Plate Body (7075-T6 Anodized) -->
+    <polygon points="170,160 330,160 380,210 380,290 330,340 170,340 120,290 120,210" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
+    <circle cx="250" cy="250" r="70" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+
+    <!-- Locking Ball Mechanism (Chrome 440C Balls) -->
+    <g fill="url(#metalGrad)" stroke="#ffffff" stroke-width="1.5">
+      <circle cx="250" cy="195" r="10"/>
+      <circle cx="298" cy="222" r="10"/>
+      <circle cx="298" cy="278" r="10"/>
+      <circle cx="250" cy="305" r="10"/>
+      <circle cx="202" cy="278" r="10"/>
+      <circle cx="202" cy="222" r="10"/>
+    </g>
+
+    <!-- Pneumatic Piston Locking Cone -->
+    <circle cx="250" cy="250" r="32" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+    <circle cx="250" cy="250" r="15" fill="#0b1120" stroke="#f8fafc" stroke-width="1.5"/>
+
+    <!-- Electrical Signal Contact Block (Gold Pins) -->
+    <rect x="330" y="225" width="30" height="50" rx="4" fill="#0f172a" stroke="#eab308" stroke-width="1.5"/>
+    <g fill="#eab308">
+      <circle cx="340" cy="235" r="3"/><circle cx="350" cy="235" r="3"/>
+      <circle cx="340" cy="250" r="3"/><circle cx="350" cy="250" r="3"/>
+      <circle cx="340" cy="265" r="3"/><circle cx="350" cy="265" r="3"/>
+    </g>
+
+    <!-- Dual Air Pass-Through Ports -->
+    <circle cx="155" cy="235" r="8" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="155" cy="265" r="8" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+
+</svg>

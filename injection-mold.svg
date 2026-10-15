@@ -1,0 +1,122 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    
+    <!-- Shading Gradients -->
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="40%" stop-color="#e2e8f0"/>
+      <stop offset="70%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.02"/>
+    </linearGradient>
+
+    <!-- Isometric Grid Pattern -->
+    <pattern id="isoGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 40 M 0 0 L 40 40" fill="none" stroke="#334155" stroke-width="0.5" stroke-opacity="0.25"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+  <rect width="800" height="600" fill="url(#isoGrid)"/>
+
+  <!-- Ambient Glow -->
+  <circle cx="400" cy="300" r="260" fill="url(#glowGrad)"/>
+
+  <!-- Technical Frame & Title Block -->
+  <rect x="24" y="24" width="752" height="552" fill="none" stroke="#334155" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <rect x="28" y="28" width="744" height="544" fill="none" stroke="#475569" stroke-width="0.8"/>
+
+  <!-- Corner Alignment Marks -->
+  <path d="M 24 40 L 40 40 L 40 24 M 776 40 L 760 40 L 760 24 M 24 560 L 40 560 L 40 576 M 776 560 L 760 560 L 760 576" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+
+  <!-- Technical Telemetry Top Left -->
+  <g font-family="'Inter', -apple-system, sans-serif" font-size="11" fill="#94a3b8">
+    <text x="44" y="52" font-weight="700" fill="#38bdf8" letter-spacing="1">SOLIDWORKS 3D CAD MODEL</text>
+    <text x="44" y="68" fill="#64748b">SCALE: 1:1  |  PROJECTION: THIRD ANGLE  |  STATUS: RELEASED</text>
+  </g>
+
+  <!-- Title Block Bottom Right -->
+  <g transform="translate(480, 480)">
+    <rect width="280" height="80" rx="6" fill="#1e293b" fill-opacity="0.9" stroke="#334155" stroke-width="1"/>
+    <rect x="0" y="0" width="280" height="24" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="12" y="16" font-family="'Inter', sans-serif" font-size="10" font-weight="700" fill="#38bdf8" letter-spacing="0.5">PART SPECIFICATION / GD&amp;T</text>
+    <text x="12" y="42" font-family="'Inter', sans-serif" font-size="12" font-weight="700" fill="#f8fafc">4-Cavity Injection Mold</text>
+    <text x="12" y="58" font-family="'Inter', sans-serif" font-size="10" fill="#94a3b8">DWG NO: <tspan fill="#f1f5f9" font-weight="600">MOLD-4C-P20</tspan> | MATL: <tspan fill="#f1f5f9" font-weight="600">AISI P20+Ni Steel</tspan></text>
+    <text x="12" y="72" font-family="'Inter', sans-serif" font-size="9" fill="#64748b">DESIGNER: DAMANJIT SINGH  |  VERIFIED DFM</text>
+  </g>
+
+  <!-- Coordinate Triad Bottom Left -->
+  <g transform="translate(60, 520)">
+    <line x1="0" y1="0" x2="35" y2="0" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="0" y2="-35" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="-22" y2="22" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="3.5" fill="#f8fafc"/>
+    <text x="42" y="4" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#ef4444">X</text>
+    <text x="-4" y="-42" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#22c55e">Y</text>
+    <text x="-32" y="32" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#3b82f6">Z</text>
+  </g>
+
+  <!-- Main CAD Model Geometry Render -->
+    <g transform="translate(130, 90)">
+    <!-- Lower Cavity Half Plate -->
+    <path d="M 80 240 L 270 340 L 490 230 L 300 130 Z" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+    <path d="M 80 240 L 80 290 L 270 390 L 270 340 Z" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+    <path d="M 270 340 L 270 390 L 490 280 L 490 230 Z" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+
+    <!-- 4 Precision Mold Cavities -->
+    <g fill="#0284c7" stroke="#38bdf8" stroke-width="1.5">
+      <!-- Cavity 1 -->
+      <path d="M 180 230 L 220 250 L 250 235 L 210 215 Z"/>
+      <!-- Cavity 2 -->
+      <path d="M 260 270 L 300 290 L 330 275 L 290 255 Z"/>
+      <!-- Cavity 3 -->
+      <path d="M 270 200 L 310 220 L 340 205 L 300 185 Z"/>
+      <!-- Cavity 4 -->
+      <path d="M 350 240 L 390 260 L 420 245 L 380 225 Z"/>
+    </g>
+
+    <!-- Hot Runner Runner Channels -->
+    <line x1="285" y1="235" x2="215" y2="232" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="285" y1="235" x2="295" y2="272" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="285" y1="235" x2="305" y2="202" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="285" y1="235" x2="385" y2="242" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="285" cy="235" r="4.5" fill="#ef4444" stroke="#ffffff" stroke-width="1"/>
+
+    <!-- 4 Hardened Leader Guide Pins -->
+    <g fill="url(#metalGrad)" stroke="#cbd5e1" stroke-width="1.5">
+      <cylinder cx="105" cy="220" r="12" h="60"/>
+      <path d="M 95 230 L 95 170 A 10 5 0 0 1 115 170 L 115 230 Z"/>
+      <ellipse cx="105" cy="170" rx="10" ry="5"/>
+
+      <path d="M 465 220 L 465 160 A 10 5 0 0 1 485 160 L 485 220 Z"/>
+      <ellipse cx="475" cy="160" rx="10" ry="5"/>
+
+      <path d="M 275 320 L 275 260 A 10 5 0 0 1 295 260 L 295 320 Z"/>
+      <ellipse cx="285" cy="260" rx="10" ry="5"/>
+
+      <path d="M 285 130 L 285 70 A 10 5 0 0 1 305 70 L 305 130 Z"/>
+      <ellipse cx="295" cy="70" rx="10" ry="5"/>
+    </g>
+
+    <!-- Water Cooling Lines (Blue Dash) -->
+    <path d="M 60 260 L 470 180" stroke="#06b6d4" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="380" y="160" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#06b6d4">CONFORMAL COOLING</text>
+  </g>
+
+</svg>
